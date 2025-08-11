@@ -5,4 +5,6 @@ streamlit-antd-components==0.3.2
 st-cytoscape
 pyaml==23.12.0
 PyYAML==6.0.1
-
+pydantic==1.10.4
+streamlit-pydantic==0.6.0
+xsdata-pydantic==22.10
