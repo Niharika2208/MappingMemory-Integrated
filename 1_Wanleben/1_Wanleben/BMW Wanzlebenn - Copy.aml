@@ -1,0 +1,843 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CAEXFile SchemaVersion="2.15" FileName="BMW Wanzlebenn - Copy.aml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CAEX_ClassModel_V2.15.xsd">
+  <AdditionalInformation AutomationMLVersion="2.0" />
+  <AdditionalInformation>
+    <WriterHeader>
+      <WriterName>AutomationML Editor</WriterName>
+      <WriterID>916578CA-FE0D-474E-A4FC-9E1719892369</WriterID>
+      <WriterVendor>AutomationML e.V.</WriterVendor>
+      <WriterVendorURL>www.AutomationML.org</WriterVendorURL>
+      <WriterVersion>6.4.1.3</WriterVersion>
+      <WriterRelease>6.4.1.3</WriterRelease>
+      <LastWritingDateTime>2025-08-06T13:37:27.7296957</LastWritingDateTime>
+      <WriterProjectTitle>unspecified</WriterProjectTitle>
+      <WriterProjectID>unspecified</WriterProjectID>
+    </WriterHeader>
+  </AdditionalInformation>
+  <InstanceHierarchy Name="InstanceHierarchy" ID="05522b5f-25fc-4d6b-841b-564b75fc5781">
+    <Version>1.0.0</Version>
+    <InternalElement Name="Assembly" ID="6789b106-64d1-403a-9e32-a5f14d50bedc" RefBaseSystemUnitPath="MechanicalSystemUnitClassLib/Assembly">
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="NameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ManufacturingPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ReplacementAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="QuantityAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="MaterialAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="BMWPartNumberAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringNameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="StandardAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="TypeAttributeType" AttributeDataType="xs:string" />
+      <ExternalInterface Name="PPRConnector" ID="eea5eb7a-a4c0-4da1-84b0-1c4a273ae398" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/PPRConnector" />
+      <InternalLink RefPartnerSideA="6789b106-64d1-403a-9e32-a5f14d50bedc:PPRConnector" RefPartnerSideB="c7ad03a1-4b91-4838-82bb-39e1e35ae1bc:PPRConnector" Name="Link" />
+      <RoleRequirements RefBaseRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/AssemblyRoleClass" />
+    </InternalElement>
+    <InternalElement Name="Part" ID="c7ad03a1-4b91-4838-82bb-39e1e35ae1bc" RefBaseSystemUnitPath="MechanicalSystemUnitClassLib/Part">
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="NameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ManufacturingPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ReplacementAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="QuantityAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="MaterialAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="BMWPartNumberAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringNameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="StandardAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="TypeAttributeType" AttributeDataType="xs:string" />
+      <ExternalInterface Name="PPRConnector" ID="af1647da-092f-4bbc-afdd-ce1b0af8608a" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/PPRConnector" />
+      <RoleRequirements RefBaseRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/PartRoleClass" />
+    </InternalElement>
+  </InstanceHierarchy>
+  <InterfaceClassLib Name="AutomationMLInterfaceClassLib">
+    <Description>Standard Automation Markup Language Interface Class Library</Description>
+    <Version>2.10.0</Version>
+    <InterfaceClass Name="AutomationMLBaseInterface">
+      <InterfaceClass Name="Order" RefBaseClassPath="AutomationMLBaseInterface">
+        <Attribute Name="Direction" AttributeDataType="xs:string" />
+      </InterfaceClass>
+      <InterfaceClass Name="Port" RefBaseClassPath="AutomationMLBaseInterface">
+        <Attribute Name="Direction" AttributeDataType="xs:string">
+          <Constraint Name="AllowedValues">
+            <NominalScaledType>
+              <RequiredValue>In</RequiredValue>
+              <RequiredValue>Out</RequiredValue>
+              <RequiredValue>InOut</RequiredValue>
+            </NominalScaledType>
+          </Constraint>
+        </Attribute>
+        <Attribute Name="Cardinality">
+          <Attribute Name="MinOccur" AttributeDataType="xs:unsignedInt" />
+          <Attribute Name="MaxOccur" AttributeDataType="xs:unsignedInt" />
+        </Attribute>
+        <Attribute Name="Category" AttributeDataType="xs:string" />
+      </InterfaceClass>
+      <InterfaceClass Name="PPRConnector" RefBaseClassPath="AutomationMLBaseInterface" />
+      <InterfaceClass Name="ExternalDataConnector" RefBaseClassPath="AutomationMLBaseInterface">
+        <Attribute Name="refURI" AttributeDataType="xs:anyURI" />
+        <InterfaceClass Name="COLLADAInterface" RefBaseClassPath="ExternalDataConnector" />
+        <InterfaceClass Name="PLCopenXMLInterface" RefBaseClassPath="ExternalDataConnector" />
+        <InterfaceClass Name="ExternalDataReference" RefBaseClassPath="ExternalDataConnector">
+          <Attribute Name="MIMEType" AttributeDataType="xs:string" />
+        </InterfaceClass>
+      </InterfaceClass>
+      <InterfaceClass Name="Communication" RefBaseClassPath="AutomationMLBaseInterface">
+        <InterfaceClass Name="SignalInterface" RefBaseClassPath="Communication" />
+      </InterfaceClass>
+    </InterfaceClass>
+  </InterfaceClassLib>
+  <RoleClassLib Name="AutomationMLBaseRoleClassLib">
+    <Description>Automation Markup Language base role class library</Description>
+    <Version>2.10.0</Version>
+    <RoleClass Name="AutomationMLBaseRole">
+      <RoleClass Name="Group" RefBaseClassPath="AutomationMLBaseRole">
+        <Attribute Name="AssociatedFacet" AttributeDataType="xs:string" />
+      </RoleClass>
+      <RoleClass Name="Facet" RefBaseClassPath="AutomationMLBaseRole" />
+      <RoleClass Name="Resource" RefBaseClassPath="AutomationMLBaseRole" />
+      <RoleClass Name="Product" RefBaseClassPath="AutomationMLBaseRole" />
+      <RoleClass Name="Process" RefBaseClassPath="AutomationMLBaseRole" />
+      <RoleClass Name="Structure" RefBaseClassPath="AutomationMLBaseRole">
+        <RoleClass Name="ProductStructure" RefBaseClassPath="Structure" />
+        <RoleClass Name="ProcessStructure" RefBaseClassPath="Structure" />
+        <RoleClass Name="ResourceStructure" RefBaseClassPath="Structure" />
+      </RoleClass>
+      <RoleClass Name="ExternalData" RefBaseClassPath="AutomationMLBaseRole" />
+    </RoleClass>
+  </RoleClassLib>
+  <RoleClassLib Name="LayoutRoleClassLib">
+    <Version>0</Version>
+    <RoleClass Name="GroupRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="BaseRadiusAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="VolumeAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="CellNameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="SizeAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="LevelAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ColorAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="GraphicGroupAttributeType" AttributeDataType="xs:string" />
+    </RoleClass>
+  </RoleClassLib>
+  <RoleClassLib Name="MechanicalRoleClassLib">
+    <Version>0</Version>
+    <RoleClass Name="Mechanical ObjectRoleClass">
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="NameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ManufacturingPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ReplacementAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="QuantityAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="MaterialAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="BMWPartNumberAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringNameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="StandardAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="TypeAttributeType" AttributeDataType="xs:string" />
+      <RoleClass Name="AssemblyRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="NameAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="ManufacturingPositionAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="ReplacementAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="QuantityAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="MaterialAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="BMWPartNumberAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="EngineeringNameAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="EngineeringPositionAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="StandardAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="TypeAttributeType" AttributeDataType="xs:string" />
+      </RoleClass>
+      <RoleClass Name="PartRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="NameAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="ManufacturingPositionAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="ReplacementAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="QuantityAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="MaterialAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="BMWPartNumberAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="EngineeringNameAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="EngineeringPositionAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="StandardAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="TypeAttributeType" AttributeDataType="xs:string" />
+      </RoleClass>
+    </RoleClass>
+  </RoleClassLib>
+  <RoleClassLib Name="ElectricalRoleClassLib">
+    <Version>0</Version>
+    <RoleClass Name="ArticleRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ArticleLabelAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="VendorTypeNumberAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="DescriptionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EPLANVendorNumberAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" />
+    </RoleClass>
+    <RoleClass Name="DeviceItemRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="functionReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="locationReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" />
+    </RoleClass>
+  </RoleClassLib>
+  <SystemUnitClassLib Name="DiamantSystemUnitClassLib">
+    <SystemUnitClass Name="Group" ID="{A3574CA1-AFBD-47de-8966-931BC01AC4A4}">
+      <InternalElement Name="Layout" ID="196338bc-2955-485b-9815-50fb20bd92ce" RefBaseSystemUnitPath="LayoutSystemUnitClassLib/Group">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="BaseRadiusAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="VolumeAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="CellNameAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="SizeAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="LevelAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="ColorAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="GraphicGroupAttributeType" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="LayoutRoleClassLib/GroupRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Mechanical" ID="45837789-a942-4a9e-a93c-32df63ca85b3" RefBaseSystemUnitPath="MechanicalSystemUnitClassLib/Mechanical Object">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="NameAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="ManufacturingPositionAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="ReplacementAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="QuantityAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="MaterialAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="BMWPartNumberAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="EngineeringNameAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="EngineeringPositionAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="StandardAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="TypeAttributeType" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Electrical" ID="2706e49c-8bb4-4a90-8728-1b8b5256e9bd" RefBaseSystemUnitPath="ElectricalSystemUnitClassLib/DeviceItem">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="functionReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="locationReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="ElectricalRoleClassLib/DeviceItemRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="LayoutRoleClassLib/GroupRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ElectricalRoleClassLib/DeviceItemRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Assembly" ID="{0E044360-CEFB-4e3f-A3EF-E9E9D964C19C}">
+      <InternalElement Name="Mechanical" ID="8e868025-bf06-441c-8a5f-b339dab9ce2c" RefBaseSystemUnitPath="MechanicalSystemUnitClassLib/Assembly">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/AssemblyRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Layout" ID="0dd5dc10-6d58-4230-aa4d-c90bf15e2642" RefBaseSystemUnitPath="LayoutSystemUnitClassLib/Group">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="BaseRadiusAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="VolumeAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="CellNameAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="SizeAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="LevelAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="ColorAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="GraphicGroupAttributeType" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="LayoutRoleClassLib/GroupRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Electrical" ID="463e00da-e7ac-4092-a2f9-0a5a7d77c212" RefBaseSystemUnitPath="ElectricalSystemUnitClassLib/DeviceItem">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="functionReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="locationReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="ElectricalRoleClassLib/DeviceItemRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/AssemblyRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="LayoutRoleClassLib/GroupRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ElectricalRoleClassLib/DeviceItemRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Part" ID="{8C865A0C-805D-4f71-A326-484A8E96E9AC}">
+      <InternalElement Name="Mechanical" ID="d4aad3ed-fd02-49fa-900a-819199f224bb" RefBaseSystemUnitPath="MechanicalSystemUnitClassLib/Part">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/PartRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Electrical" ID="0c97bbd2-ee4e-409d-8be1-c349845448b0" RefBaseSystemUnitPath="ElectricalSystemUnitClassLib/Article">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="ArticleLabelAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="VendorTypeNumberAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="DescriptionAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="EPLANVendorNumberAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="ElectricalRoleClassLib/ArticleRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/PartRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ElectricalRoleClassLib/ArticleRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Article" ID="{3D5A0E8B-410D-423d-AF7F-D3865A07387E}">
+      <InternalElement Name="Electrical" ID="31912d65-a9e7-4174-bfa9-0dd45cbafbc4" RefBaseSystemUnitPath="ElectricalSystemUnitClassLib/Article">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="ArticleLabelAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="VendorTypeNumberAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="DescriptionAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="EPLANVendorNumberAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="ElectricalRoleClassLib/ArticleRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Mechanical" ID="f62ded72-0d51-4e66-8c6f-841a12acc8fa" RefBaseSystemUnitPath="MechanicalSystemUnitClassLib/Part">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/PartRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="ElectricalRoleClassLib/ArticleRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/PartRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="DeviceItem" ID="{DDEAAF4F-C075-45e6-9C73-E61A5E931FDD}">
+      <InternalElement Name="Electrical" ID="85cd27f9-27b3-4ded-84fe-605a191ce4c3" RefBaseSystemUnitPath="ElectricalSystemUnitClassLib/DeviceItem">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="functionReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="locationReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="ElectricalRoleClassLib/DeviceItemRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Layout" ID="8980bba4-506d-4d39-89d6-d0a13c0a8fc1" RefBaseSystemUnitPath="LayoutSystemUnitClassLib/Group">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="BaseRadiusAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="VolumeAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="CellNameAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="SizeAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="LevelAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="ColorAttributeType" AttributeDataType="xs:string" />
+        <Attribute Name="GraphicGroupAttributeType" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="LayoutRoleClassLib/GroupRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Mechanical" ID="91d83b49-56a8-4aab-90d4-47f099d871d7" RefBaseSystemUnitPath="MechanicalSystemUnitClassLib/Assembly">
+        <Attribute Name="Name" AttributeDataType="xs:string" />
+        <Attribute Name="ID" AttributeDataType="xs:string" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+        <RoleRequirements RefBaseRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/AssemblyRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="ElectricalRoleClassLib/DeviceItemRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="LayoutRoleClassLib/GroupRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/AssemblyRoleClass" />
+    </SystemUnitClass>
+  </SystemUnitClassLib>
+  <SystemUnitClassLib Name="LayoutSystemUnitClassLib">
+    <SystemUnitClass Name="Group" ID="178123cd-fb9c-4be9-b3ef-ed68d0dce1ab">
+      <AdditionalInformation>ConceptMapping: [
+    {
+        "source_file_type": "csv",
+        "toolname": "microstation",
+        "rule": "Type == 'assembly')",     
+        "attribute_mapping": [
+            {
+                "suc_attr_name": "Name",
+                "raw_data_name": "Cell Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "ID",
+                "raw_data_name": "id",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "BaseRadiusAttributeType",
+                "raw_data_name": "Base Radius",
+                "attribute_type": "AttributeLib/...",
+                "type": "float"
+            },
+            {
+                "suc_attr_name": "VolumeAttributeType",
+                "raw_data_name": "Volume",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }, 
+            {
+                "suc_attr_name": "CellNameAttributeType",
+                "raw_data_name": "Cell Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "float"
+            },
+            {
+                "suc_attr_name": "SizeAttributeType",
+                "raw_data_name": "Size",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }, 
+            {
+                "suc_attr_name": "LevelAttributeType",
+                "raw_data_name": "Level",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "ColorAttributeType",
+                "raw_data_name": "Color",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },  
+            {
+                "suc_attr_name": "GraphicGroupAttributeType",
+                "raw_data_name": "Graphic Group",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "BaseRadiusAttributeType",
+                "raw_data_name": "Base Radius",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }   
+        ]
+    }
+]</AdditionalInformation>
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="BaseRadiusAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="VolumeAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="CellNameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="SizeAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="LevelAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ColorAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="GraphicGroupAttributeType" AttributeDataType="xs:string" />
+      <SupportedRoleClass RefRoleClassPath="LayoutRoleClassLib/GroupRoleClass" />
+    </SystemUnitClass>
+  </SystemUnitClassLib>
+  <SystemUnitClassLib Name="MechanicalSystemUnitClassLib">
+    <SystemUnitClass Name="Mechanical Object" ID="D17A92CE-D47C-42a8-863F-143AFE9D4935">
+      <AdditionalInformation>ConceptMapping: [
+    {
+        "source_file_type": "csv",
+        "toolname": "mechanical",
+        "rule": "(Type == 'mechanical object')",     
+        "attribute_mapping": [
+            {
+                "suc_attr_name": "Name",
+                "raw_data_name": "Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "ID",
+                "raw_data_name": "Manufacturing Position",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "NameAttributeType",
+                "raw_data_name": "Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "float"
+            },
+            {
+                "suc_attr_name": "ManufacturingPositionAttributeType",
+                "raw_data_name": "Manufacturing Positio",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }, 
+            {
+                "suc_attr_name": "VendorAttributeType",
+                "raw_data_name": "Manufacturer",
+                "attribute_type": "AttributeLib/...",
+                "type": "float"
+            },
+            {
+                "suc_attr_name": "ReplacementAttributeType",
+                "raw_data_name": "Replacement(E) or Wearing Part (V)",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }, 
+            {
+                "suc_attr_name": "QuantityAttributeType",
+                "raw_data_name": "Quantity",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "MaterialAttributeType",
+                "raw_data_name": "Material",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },  
+            {
+                "suc_attr_name": "BMWPartNumberAttributeType",
+                "raw_data_name": "BMW Part Number",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "EngineeringNameAttributeType",
+                "raw_data_name": "Engineering Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "EngineeringPositionAttributeType",
+                "raw_data_name": "Engineering Position",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "StandardAttributeType",
+                "raw_data_name": "xx",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "TypeAttributeType",
+                "raw_data_name": "Type",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }
+            
+        ]
+    }
+]</AdditionalInformation>
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="NameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ManufacturingPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ReplacementAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="QuantityAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="MaterialAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="BMWPartNumberAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringNameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="StandardAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="TypeAttributeType" AttributeDataType="xs:string" />
+      <ExternalInterface Name="PPRConnector" ID="ff0a8706-2d31-4ebe-b6c2-ada51aad78c7" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/PPRConnector" />
+      <SupportedRoleClass RefRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Assembly" ID="d151c6d7-f12b-4eee-8901-acec67d34693">
+      <AdditionalInformation>ConceptMapping: [
+    {
+        "source_file_type": "csv",
+        "toolname": "mechanical",
+        "rule": "(Type == 'assembly')",     
+        "attribute_mapping": [
+            {
+                "suc_attr_name": "Name",
+                "raw_data_name": "Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "ID",
+                "raw_data_name": "Manufacturing Position",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "NameAttributeType",
+                "raw_data_name": "Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "float"
+            },
+            {
+                "suc_attr_name": "ManufacturingPositionAttributeType",
+                "raw_data_name": "Manufacturing Positio",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }, 
+            {
+                "suc_attr_name": "VendorAttributeType",
+                "raw_data_name": "Manufacturer",
+                "attribute_type": "AttributeLib/...",
+                "type": "float"
+            },
+            {
+                "suc_attr_name": "ReplacementAttributeType",
+                "raw_data_name": "Replacement(E) or Wearing Part (V)",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }, 
+            {
+                "suc_attr_name": "QuantityAttributeType",
+                "raw_data_name": "Quantity",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "MaterialAttributeType",
+                "raw_data_name": "Material",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },  
+            {
+                "suc_attr_name": "BMWPartNumberAttributeType",
+                "raw_data_name": "BMW Part Number",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "EngineeringNameAttributeType",
+                "raw_data_name": "Engineering Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "EngineeringPositionAttributeType",
+                "raw_data_name": "Engineering Position",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "StandardAttributeType",
+                "raw_data_name": "xx",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "TypeAttributeType",
+                "raw_data_name": "Type",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }
+            
+        ]
+    }
+]</AdditionalInformation>
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="NameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ManufacturingPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ReplacementAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="QuantityAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="MaterialAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="BMWPartNumberAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringNameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="StandardAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="TypeAttributeType" AttributeDataType="xs:string" />
+      <ExternalInterface Name="PPRConnector" ID="41eaf745-2099-43db-b3d9-fa7c8b31aaba" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/PPRConnector" />
+      <SupportedRoleClass RefRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/AssemblyRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Part" ID="175127e9-a3a3-4f93-9ade-2f4b4b567a39">
+      <AdditionalInformation>ConceptMapping: [
+    {
+        "source_file_type": "csv",
+        "toolname": "mechanical",
+        "rule": "(Type == 'part')",     
+        "attribute_mapping": [
+            {
+                "suc_attr_name": "Name",
+                "raw_data_name": "Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "ID",
+                "raw_data_name": "Manufacturing Position",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "NameAttributeType",
+                "raw_data_name": "Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "float"
+            },
+            {
+                "suc_attr_name": "ManufacturingPositionAttributeType",
+                "raw_data_name": "Manufacturing Positio",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }, 
+            {
+                "suc_attr_name": "VendorAttributeType",
+                "raw_data_name": "Manufacturer",
+                "attribute_type": "AttributeLib/...",
+                "type": "float"
+            },
+            {
+                "suc_attr_name": "ReplacementAttributeType",
+                "raw_data_name": "Replacement(E) or Wearing Part (V)",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }, 
+            {
+                "suc_attr_name": "QuantityAttributeType",
+                "raw_data_name": "Quantity",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "MaterialAttributeType",
+                "raw_data_name": "Material",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },  
+            {
+                "suc_attr_name": "BMWPartNumberAttributeType",
+                "raw_data_name": "BMW Part Number",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "EngineeringNameAttributeType",
+                "raw_data_name": "Engineering Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "EngineeringPositionAttributeType",
+                "raw_data_name": "Engineering Position",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "StandardAttributeType",
+                "raw_data_name": "xx",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "TypeAttributeType",
+                "raw_data_name": "Type",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }
+            
+        ]
+    }
+]</AdditionalInformation>
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="NameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ManufacturingPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ReplacementAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="QuantityAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="MaterialAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="BMWPartNumberAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringNameAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EngineeringPositionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="StandardAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="TypeAttributeType" AttributeDataType="xs:string" />
+      <ExternalInterface Name="PPRConnector" ID="debb71e0-5983-4ed9-b818-74a976745c50" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/PPRConnector" />
+      <SupportedRoleClass RefRoleClassPath="MechanicalRoleClassLib/Mechanical ObjectRoleClass/PartRoleClass" />
+    </SystemUnitClass>
+  </SystemUnitClassLib>
+  <SystemUnitClassLib Name="ElectricalSystemUnitClassLib">
+    <SystemUnitClass Name="Article" ID="{3D5A0E8B-410D-423d-AF7F-D3865A07387E}">
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="VendorAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="ArticleLabelAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="VendorTypeNumberAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="DescriptionAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="EPLANVendorNumberAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" />
+      <SupportedRoleClass RefRoleClassPath="ElectricalRoleClassLib/ArticleRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="DeviceItem" ID="{DDEAAF4F-C075-45e6-9C73-E61A5E931FDD}">
+      <Attribute Name="Name" AttributeDataType="xs:string" />
+      <Attribute Name="ID" AttributeDataType="xs:string" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+      <Attribute Name="productReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="functionReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="locationReferenceDesignationAttributeType" AttributeDataType="xs:string" />
+      <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" />
+      <SupportedRoleClass RefRoleClassPath="ElectricalRoleClassLib/DeviceItemRoleClass" />
+    </SystemUnitClass>
+  </SystemUnitClassLib>
+</CAEXFile>

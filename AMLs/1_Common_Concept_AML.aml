@@ -1,0 +1,1296 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CAEXFile SchemaVersion="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.dke.de/CAEX" xsi:schemaLocation="http://www.dke.de/CAEX CAEX_ClassModel_V.3.0.xsd" FileName="1_Common_Concept_AML.aml">
+  <SuperiorStandardVersion>AutomationML 2.10</SuperiorStandardVersion>
+  <SourceDocumentInformation OriginName="AutomationML Editor" OriginID="916578CA-FE0D-474E-A4FC-9E1719892369" OriginVersion="6.3.5.0" LastWritingDateTime="2024-11-07T13:41:09.3351613+01:00" OriginProjectID="unspecified" OriginProjectTitle="unspecified" OriginRelease="6.3.5.0" OriginVendor="AutomationML e.V." OriginVendorURL="www.AutomationML.org" />
+  <InterfaceClassLib Name="AutomationMLInterfaceClassLib">
+    <Description>Standard Automation Markup Language Interface Class Library</Description>
+    <Version>2.10.0</Version>
+    <InterfaceClass Name="AutomationMLBaseInterface">
+      <InterfaceClass Name="Order" RefBaseClassPath="AutomationMLBaseInterface">
+        <Attribute Name="Direction" AttributeDataType="xs:string" RefAttributeType="AutomationMLBaseAttributeTypeLib/Direction" />
+      </InterfaceClass>
+      <InterfaceClass Name="Port" RefBaseClassPath="AutomationMLBaseInterface">
+        <Attribute Name="Direction" AttributeDataType="xs:string" RefAttributeType="AutomationMLBaseAttributeTypeLib/Direction">
+          <Constraint Name="AllowedValues">
+            <NominalScaledType>
+              <RequiredValue>In</RequiredValue>
+              <RequiredValue>Out</RequiredValue>
+              <RequiredValue>InOut</RequiredValue>
+            </NominalScaledType>
+          </Constraint>
+        </Attribute>
+        <Attribute Name="Cardinality" RefAttributeType="AutomationMLBaseAttributeTypeLib/Cardinality">
+          <Attribute Name="MinOccur" AttributeDataType="xs:unsignedInt" />
+          <Attribute Name="MaxOccur" AttributeDataType="xs:unsignedInt" />
+        </Attribute>
+        <Attribute Name="Category" AttributeDataType="xs:string" RefAttributeType="AutomationMLBaseAttributeTypeLib/Category" />
+      </InterfaceClass>
+      <InterfaceClass Name="PPRConnector" RefBaseClassPath="AutomationMLBaseInterface" />
+      <InterfaceClass Name="ExternalDataConnector" RefBaseClassPath="AutomationMLBaseInterface">
+        <Attribute Name="refURI" AttributeDataType="xs:anyURI" RefAttributeType="AutomationMLBaseAttributeTypeLib/refURI" />
+        <InterfaceClass Name="COLLADAInterface" RefBaseClassPath="ExternalDataConnector" />
+        <InterfaceClass Name="PLCopenXMLInterface" RefBaseClassPath="ExternalDataConnector" />
+        <InterfaceClass Name="ExternalDataReference" RefBaseClassPath="ExternalDataConnector">
+          <Attribute Name="MIMEType" AttributeDataType="xs:string" RefAttributeType="AutomationMLBaseAttributeTypeLib/MIMEType" />
+        </InterfaceClass>
+      </InterfaceClass>
+      <InterfaceClass Name="Communication" RefBaseClassPath="AutomationMLBaseInterface">
+        <InterfaceClass Name="SignalInterface" RefBaseClassPath="Communication" />
+      </InterfaceClass>
+    </InterfaceClass>
+  </InterfaceClassLib>
+  <InterfaceClassLib Name="MCADInterfaceClassLib">
+    <Version>0</Version>
+    <InterfaceClass Name="ParentInterfaceClass" />
+  </InterfaceClassLib>
+  <InterfaceClassLib Name="ECADInterfaceClassLib">
+    <Version>0</Version>
+    <InterfaceClass Name="ClampingPointInterfaceClass" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/Communication/SignalInterface" />
+  </InterfaceClassLib>
+  <InterfaceClassLib Name="AutomationInterfaceClassLib">
+    <Version>0</Version>
+    <InterfaceClass Name="TagInterfaceClass" RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/ExternalDataConnector/PLCopenXMLInterface" />
+  </InterfaceClassLib>
+  <RoleClassLib Name="AutomationMLBaseRoleClassLib">
+    <Description>Automation Markup Language base role class library</Description>
+    <Version>2.10.0</Version>
+    <RoleClass Name="AutomationMLBaseRole">
+      <RoleClass Name="Group" RefBaseClassPath="AutomationMLBaseRole">
+        <Attribute Name="AssociatedFacet" AttributeDataType="xs:string" RefAttributeType="AutomationMLBaseAttributeTypeLib/AssociatedFacet" />
+      </RoleClass>
+      <RoleClass Name="Facet" RefBaseClassPath="AutomationMLBaseRole" />
+      <RoleClass Name="Resource" RefBaseClassPath="AutomationMLBaseRole" />
+      <RoleClass Name="Product" RefBaseClassPath="AutomationMLBaseRole" />
+      <RoleClass Name="Process" RefBaseClassPath="AutomationMLBaseRole" />
+      <RoleClass Name="Structure" RefBaseClassPath="AutomationMLBaseRole">
+        <RoleClass Name="ProductStructure" RefBaseClassPath="Structure" />
+        <RoleClass Name="ProcessStructure" RefBaseClassPath="Structure" />
+        <RoleClass Name="ResourceStructure" RefBaseClassPath="Structure" />
+      </RoleClass>
+      <RoleClass Name="ExternalData" RefBaseClassPath="AutomationMLBaseRole" />
+    </RoleClass>
+  </RoleClassLib>
+  <RoleClassLib Name="PPRRoleClassLib">
+    <Version>0</Version>
+    <RoleClass Name="ProcessRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Process">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+    </RoleClass>
+    <RoleClass Name="ProductRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Product">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+    </RoleClass>
+    <RoleClass Name="ResourceRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <RoleClass Name="DeviceRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      </RoleClass>
+      <RoleClass Name="FunctionGroupRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      </RoleClass>
+      <RoleClass Name="WorkCellRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      </RoleClass>
+    </RoleClass>
+  </RoleClassLib>
+  <RoleClassLib Name="MCADRoleClassLib">
+    <Version>0</Version>
+    <RoleClass Name="DeviceRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <RoleClass Name="FrameRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="WeightAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/WeightAttributeType" />
+      </RoleClass>
+      <RoleClass Name="ControllerRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="No. Digital InputAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/No. Digital InputAttributeType" />
+        <Attribute Name="No. Digital OutputAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/No. Digital OutputAttributeType" />
+      </RoleClass>
+      <RoleClass Name="ElectricalDeviceRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      </RoleClass>
+      <RoleClass Name="LightSensorRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      </RoleClass>
+      <RoleClass Name="ProximitySensorRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="Sensing RageAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Sensing RageAttributeType" />
+      </RoleClass>
+      <RoleClass Name="ActuatorRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="Shaft DiameterAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Shaft DiameterAttributeType" />
+        <ExternalInterface Name="ParentInterface" ID="{0DA527DF-3BE7-43d0-9376-D0074D33BE0A}" RefBaseClassPath="MCADInterfaceClassLib/ParentInterfaceClass" />
+      </RoleClass>
+      <RoleClass Name="ButtonRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      </RoleClass>
+      <RoleClass Name="LimitSwitchRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="Switch LengthAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Switch LengthAttributeType" />
+      </RoleClass>
+      <RoleClass Name="LightRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="ColorAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ColorAttributeType" />
+      </RoleClass>
+    </RoleClass>
+    <RoleClass Name="FunctionGroupRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <RoleClass Name="LinearConveyorRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="WeightAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/WeightAttributeType" />
+        <Attribute Name="Conveyor LengthAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Conveyor LengthAttributeType" />
+      </RoleClass>
+      <RoleClass Name="RotationConveyorRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="WeightAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/WeightAttributeType" />
+      </RoleClass>
+      <RoleClass Name="MachineRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      </RoleClass>
+    </RoleClass>
+  </RoleClassLib>
+  <RoleClassLib Name="ECADRoleClassLib">
+    <Version>0</Version>
+    <RoleClass Name="DeviceRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+      <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+      <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+    </RoleClass>
+    <RoleClass Name="WireRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole/Resource">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="QuelleAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/QuelleAttributeType" />
+      <Attribute Name="ZielAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ZielAttributeType" />
+      <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+    </RoleClass>
+  </RoleClassLib>
+  <RoleClassLib Name="AutomationRoleClassLib">
+    <Version>0</Version>
+    <RoleClass Name="DeviceRoleClass" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+    </RoleClass>
+  </RoleClassLib>
+  <SystemUnitClassLib Name="DiamantSystemUnitClassLib">
+    <SystemUnitClass Name="Process" ID="{DD1DCBE2-5189-4394-8868-4D047B961D22}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="PPR" ID="d7877964-5051-4390-bdbf-4ec9e64c5703" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Process">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ProcessRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ProcessRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Product" ID="{D5EEB735-A10A-4bfe-9C15-E53EFDC18D2D}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="PPR" ID="16459b0a-2234-488e-89b3-2e9181d3a2ab" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Product">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ProductRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ProductRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Device" ID="{9F1952B6-2B34-4f6e-98F2-C32644D77806}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="PPR" ID="99fffa92-eddb-40e0-9818-b6fe0baa2e82" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="MCAD" ID="dc9f392d-0ed5-4fcf-b6f4-7a8c20f6c1d9" RefBaseSystemUnitPath="MCADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="ECAD" ID="a29736d5-4233-4e0e-a7d5-c934c15c99bb" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+        <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Automation" ID="5fc604c8-ba57-4d42-9fe0-07ae5d85e14a" RefBaseSystemUnitPath="AutomationSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="FunctionGroup" ID="{F21C788C-552F-453f-93D0-497DAF67A4A7}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="PPR" ID="fa7c09d9-d5b3-44e5-bdf9-cf8252daf980" RefBaseSystemUnitPath="PPRSystemUnitClassLib/FunctionGroup">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/FunctionGroupRoleClass" />
+      </InternalElement>
+      <InternalElement Name="MCAD" ID="290fa22c-35b9-48a7-9bad-1242281f5023" RefBaseSystemUnitPath="MCADSystemUnitClassLib/FunctionGroup">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/FunctionGroupRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="WorkCell" ID="{50266946-7896-444a-8A48-478ECD013852}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="PPR" ID="4261dfab-4786-435f-a8fd-bdabd59a2dc3" RefBaseSystemUnitPath="PPRSystemUnitClassLib/WorkCell">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/WorkCellRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/WorkCellRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Frame" ID="{68284F80-674C-41f6-99B7-3805EC2E513D}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="84644a12-3ba7-4881-8aa3-5692843b10b3" RefBaseSystemUnitPath="MCADSystemUnitClassLib/Frame">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="WeightAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/WeightAttributeType" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass/FrameRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="0b964bd1-e704-40bf-8e73-51499cf93e5a" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/FrameRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Controller" ID="{E5429A6D-4015-46a6-A490-64F693CC064E}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="09e052d5-0a8b-4793-8bb7-80751bad5c27" RefBaseSystemUnitPath="MCADSystemUnitClassLib/Controller">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="No. Digital InputAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/No. Digital InputAttributeType" />
+        <Attribute Name="No. Digital OutputAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/No. Digital OutputAttributeType" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ControllerRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="44ca8e16-0870-4c2c-a454-bf54d01e9117" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="ECAD" ID="9d5c351c-15c4-4148-8b63-c6ead270a707" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+        <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Automation" ID="baf8be19-d5a5-4a5d-96ef-2cbab30ebebe" RefBaseSystemUnitPath="AutomationSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ControllerRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="ElectricalDevice" ID="{2A4DA589-861E-45b3-B583-4495E5693508}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="e4458551-1f54-4dbc-a11e-12abf2d903fd" RefBaseSystemUnitPath="MCADSystemUnitClassLib/ElectricalDevice">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ElectricalDeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="46914ca3-daf4-4d63-a7c5-21e667412e6a" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="ECAD" ID="fcc634d8-2e76-4fad-9234-6722280becb5" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+        <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Automation" ID="2be62da6-3a53-4332-8621-1be09db0a4ea" RefBaseSystemUnitPath="AutomationSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ElectricalDeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="LightSensor" ID="{72B6EDB1-1712-41b7-82E9-8E34826A0EA5}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="6e247185-26de-401e-83a8-acd52bec6e3d" RefBaseSystemUnitPath="MCADSystemUnitClassLib/LightSensor">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass/LightSensorRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="6c06ffaf-553e-4d3b-b146-e57387c4cb71" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="ECAD" ID="43a36208-c7da-43c6-bff4-7a7df2954d31" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+        <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Automation" ID="a73e44ce-36b6-463e-abfe-0f4e8ea44787" RefBaseSystemUnitPath="AutomationSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/LightSensorRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="ProximitySensor" ID="{B78EC238-CD23-453c-879C-2D5CE16626F7}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="4295b8f7-80cb-4b31-af1c-56f0114bcbcf" RefBaseSystemUnitPath="MCADSystemUnitClassLib/ProximitySensor">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="Sensing RageAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Sensing RageAttributeType" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ProximitySensorRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="c26434be-3868-4fcb-b0cf-dad768f39308" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="ECAD" ID="5b89c554-cab8-45b3-9389-df40c5ea28dd" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+        <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Automation" ID="50556e44-1713-4d39-a6cd-471374dcb002" RefBaseSystemUnitPath="AutomationSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ProximitySensorRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Actuator" ID="{722F1EA3-6708-4580-848C-A02A947CCE95}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="42ff254a-7e3e-41cf-b1a7-18ec5000d34b" RefBaseSystemUnitPath="MCADSystemUnitClassLib/Actuator">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="Shaft DiameterAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Shaft DiameterAttributeType" />
+        <ExternalInterface Name="ParentInterface" ID="{0DA527DF-3BE7-43d0-9376-D0074D33BE0A}" RefBaseClassPath="MCADInterfaceClassLib/ParentInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ActuatorRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="51bc8f9c-1679-4630-89bc-464fc3b8418a" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="ECAD" ID="d1307526-6ddd-490f-84e7-9a51b2536b41" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+        <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Automation" ID="9edff8fc-8e22-4543-8f21-a1e1f5785688" RefBaseSystemUnitPath="AutomationSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ActuatorRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Button" ID="f6e0fef1-427c-4bb3-9359-7af4bfca7d36">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="c328afc9-89e4-424e-a81a-2ae3dd0d06f8" RefBaseSystemUnitPath="MCADSystemUnitClassLib/Button">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ButtonRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="7839fcb6-30ec-4749-972b-fcb513d72fc4" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="ECAD" ID="32571e60-c65c-4ff0-b92a-9c56a1742220" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+        <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Automation" ID="86d4f6f0-49b3-4c24-805a-4b47720c1821" RefBaseSystemUnitPath="AutomationSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ButtonRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="LimitSwitch" ID="28f8a10a-6037-4ec7-85ce-63e33a7e0ff0">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="b3a96d27-c416-40ee-8eaf-5ecbc6fdef68" RefBaseSystemUnitPath="MCADSystemUnitClassLib/LimitSwitch">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="Switch LengthAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Switch LengthAttributeType" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass/LimitSwitchRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="f896f3d1-2706-4f77-b1a4-63d7efee5406" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="ECAD" ID="070f3a6b-8e16-4dce-b2a8-9a37efc342cf" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+        <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Automation" ID="e0d61f92-7a0e-4bc5-9778-7f1d12cea130" RefBaseSystemUnitPath="AutomationSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/LimitSwitchRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Light" ID="3a0625ab-2469-48c6-9909-f09dc7fd6972">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="6e8bcbd4-db44-4693-afdd-a5fed86a3535" RefBaseSystemUnitPath="MCADSystemUnitClassLib/Light">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="ColorAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ColorAttributeType" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass/LightRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="71143b1e-3513-42e8-8235-c83dc50a0363" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="ECAD" ID="4771de3d-c630-4fb8-9e51-28e661c345e4" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+        <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Automation" ID="2fae358a-e413-44be-9790-bc245d7d05a0" RefBaseSystemUnitPath="AutomationSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/LightRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="LinearConveyor" ID="{E3C17E45-DBC4-4c2e-B362-1DDF84244AD2}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="21732047-20e7-4e38-a502-414b2bbf6b8e" RefBaseSystemUnitPath="MCADSystemUnitClassLib/LinearConveyor">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="WeightAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/WeightAttributeType" />
+        <Attribute Name="Conveyor LengthAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Conveyor LengthAttributeType" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass/LinearConveyorRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="bd1cb915-2962-4d60-b35f-fe71e526f404" RefBaseSystemUnitPath="PPRSystemUnitClassLib/FunctionGroup">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/FunctionGroupRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass/LinearConveyorRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/FunctionGroupRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="RotationConveyor" ID="{DC9E9AF2-AA67-407d-BC2D-471B7A6FBA1B}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="814fbc0d-290e-45ce-836a-17bbe0ecb788" RefBaseSystemUnitPath="MCADSystemUnitClassLib/RotationConveyor">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="WeightAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/WeightAttributeType" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass/RotationConveyorRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="c077bfef-1797-4b7d-9cfe-a3f6b97c383b" RefBaseSystemUnitPath="PPRSystemUnitClassLib/FunctionGroup">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/FunctionGroupRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass/RotationConveyorRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/FunctionGroupRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Machine" ID="120165f4-8ec3-456a-8d59-66642f0ecdee">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="MCAD" ID="7977c13d-6afb-4ebb-9a8a-7e38ad54788c" RefBaseSystemUnitPath="MCADSystemUnitClassLib/Machine">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass/MachineRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="9941c85a-7b3c-4084-995f-97b99da2d8f6" RefBaseSystemUnitPath="PPRSystemUnitClassLib/FunctionGroup">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/FunctionGroupRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass/MachineRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/FunctionGroupRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Device2" ID="d853f27e-2ffe-4cbc-97da-0d5f0d6ad7b4">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="ECAD" ID="b26b8d3a-b716-4fbf-87c9-f5dd30b21f9e" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+        <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="109c7552-3156-4a17-a946-b2a8f7ca878b" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="MCAD" ID="20266415-79c8-4187-822e-ddaa39ef5e4e" RefBaseSystemUnitPath="MCADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="Automation" ID="28d5fa67-7972-487e-b262-2d013f9cc753" RefBaseSystemUnitPath="AutomationSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Wire" ID="3c65aadc-06b0-4c34-9b17-ee169dc39b44">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="ECAD" ID="94f33bb8-24a3-44f5-a945-1c293a32d714" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Wire">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="QuelleAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/QuelleAttributeType" />
+        <Attribute Name="ZielAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ZielAttributeType" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/WireRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/WireRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Device3" ID="1cb5dbae-b370-458f-a267-9aab7e35d737">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <InternalElement Name="Automation" ID="9d5c0905-0852-4030-a851-bffad5917476" RefBaseSystemUnitPath="AutomationSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="PPR" ID="0c1d6f73-4e7d-4000-8cbf-dc0cac9c3352" RefBaseSystemUnitPath="PPRSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <RoleRequirements RefBaseRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="ECAD" ID="07c3e568-9373-487f-aa84-da5f1a9f5820" RefBaseSystemUnitPath="ECADSystemUnitClassLib/Device">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+        <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+        <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+        <RoleRequirements RefBaseRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      </InternalElement>
+      <InternalElement Name="MCAD" ID="26cc9720-d639-4c0e-ac8f-2d20069ff25c" RefBaseSystemUnitPath="MCADSystemUnitClassLib/Controller">
+        <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/Name" />
+        <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/ID" />
+        <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/functionOrientedReferenceDesignation" />
+        <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/productOrientedReferenceDesignation" />
+        <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/locationOrientedReferenceDesignation" />
+        <Attribute Name="No. Digital InputAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/No. Digital InputAttributeType" />
+        <Attribute Name="No. Digital OutputAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/No. Digital OutputAttributeType" />
+        <RoleRequirements RefBaseRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ControllerRoleClass" />
+      </InternalElement>
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ControllerRoleClass" />
+    </SystemUnitClass>
+  </SystemUnitClassLib>
+  <SystemUnitClassLib Name="PPRSystemUnitClassLib">
+    <SystemUnitClass Name="Process" ID="455292dc-070e-4c64-80d9-20a4deedd310">
+      <AdditionalInformation>ConceptMapping: [{"source_file_type": "json", "toolname": "PPR-Editor", "rule": "(type == 'process')", "attribute_mapping": [{"suc_attr_name": "Name", "raw_data_name": "label", "attribute_type": "AttributeLib/...", "type": "string"}, {"suc_attr_name": "ID", "raw_data_name": "property-ppr_id", "attribute_type": "AttributeLib2/...", "type": "string"}]}]</AdditionalInformation>
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="uuid" AttributeDataType="xs:string" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ProcessRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Product" ID="9835b422-8075-4ff6-9e4f-ada7a1e57db8">
+      <AdditionalInformation>ConceptMapping: [{"source_file_type": "json", "toolname": "PPR-Editor", "rule": "(type == 'product')", "attribute_mapping": [{"suc_attr_name": "Name", "raw_data_name": "label", "attribute_type": "AttributeLib/...", "type": "string"}, {"suc_attr_name": "ID", "raw_data_name": "property-ppr_id", "attribute_type": "AttributeLib2/...", "type": "string"}]}]</AdditionalInformation>
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="uuid" AttributeDataType="xs:string" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ProductRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Resource" ID="9B50A452-83D8-4893-9E7C-AA122921D7FB">
+      <AdditionalInformation>ConceptMapping: [{"source_file_type": "json", "toolname": "PPR-Editor", "rule": "(type == 'resource')", "attribute_mapping": [{"suc_attr_name": "Name", "raw_data_name": "label", "attribute_type": "AttributeLib/...", "type": "string"}, {"suc_attr_name": "ID", "raw_data_name": "property-ppr_id", "attribute_type": "AttributeLib/...", "type": "string"}]}]</AdditionalInformation>
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="uuid" AttributeDataType="xs:string" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Device" ID="49b9b902-3879-4c00-a415-0d055d0b0702">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="uuid" AttributeDataType="xs:string" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="FunctionGroup" ID="f1374ad5-03cc-4266-8a96-bcca471e836f">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="uuid" AttributeDataType="xs:string" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/FunctionGroupRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="WorkCell" ID="36edcdfd-629e-4d86-a3c5-f3ce3c2a96bd">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="PPRAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="uuid" AttributeDataType="xs:string" />
+      <SupportedRoleClass RefRoleClassPath="PPRRoleClassLib/ResourceRoleClass/WorkCellRoleClass" />
+    </SystemUnitClass>
+  </SystemUnitClassLib>
+  <SystemUnitClassLib Name="MCADSystemUnitClassLib">
+    <SystemUnitClass Name="Device" ID="{B57494C6-CC66-4d09-8A97-08EB">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Frame" ID="383a18ef-f219-4ac8-b52a-eb8d704e01a7">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="WeightAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/WeightAttributeType" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/FrameRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Controller" ID="e6aca1c7-cf1a-4404-a242-2f0d361c37a7">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="No. Digital InputAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/No. Digital InputAttributeType" />
+      <Attribute Name="No. Digital OutputAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/No. Digital OutputAttributeType" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ControllerRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="ElectricalDevice" ID="8368405a-7d49-4cf7-b4c0-21e78e2bf8c9">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ElectricalDeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="LightSensor" ID="72B6EDB1-1712-41b7-82E9-8E34826A0EA5">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/LightSensorRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="ProximitySensor" ID="e0becb53-2e85-4286-be1e-b96f516fd9bc">
+      <AdditionalInformation>ConceptMapping: [{"source_file_type":"csv","toolname":"SolidWorks","rule":"(TYPE == 'proximity_sensor')","attribute_mapping":[{"suc_attr_name":"Name","raw_data_name":"PartName","attribute_type":"AttributeLib/...","type":"string"},{"suc_attr_name":"ID","raw_data_name":"PART_NUMBER","attribute_type":"AttributeLib/...","type":"string"},{"suc_attr_name":"Sensing_Rage","raw_data_name":"sensing_range","attribute_type":"AttributeLib/...","type":"float"}]}]</AdditionalInformation>
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="Sensing_Rage" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Sensing RageAttributeType" />
+      <Attribute Name="uuid" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/uuid">
+        <Version>1.0.0</Version>
+      </Attribute>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ProximitySensorRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Actuator" ID="9e32bf9b-6788-4495-b53d-896408960fea">
+      <AdditionalInformation>ConceptMapping: [{"source_file_type":"csv","toolname":"SolidWorks","rule":"(TYPE == 'actuator')","attribute_mapping":[{"suc_attr_name":"Name","raw_data_name":"PartName","attribute_type":"AttributeLib/...","type":"string"},{"suc_attr_name":"ID","raw_data_name":"PART_NUMBER","attribute_type":"AttributeLib/...","type":"string"},{"suc_attr_name":"Shaft_Diameter","raw_data_name":"shaft_dia","attribute_type":"AttributeLib/...","type":"float"}]}]</AdditionalInformation>
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="Shaft_Diameter" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Shaft DiameterAttributeType" />
+      <Attribute Name="uuid" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/uuid">
+        <Version>1.0.0</Version>
+      </Attribute>
+      <ExternalInterface Name="ParentInterface" ID="{0DA527DF-3BE7-43d0-9376-D0074D33BE0A}" RefBaseClassPath="MCADInterfaceClassLib/ParentInterfaceClass" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ActuatorRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Button" ID="{113DAD7B-1BB3-4908-A99C-41A3ED258D92}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/ButtonRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="LimitSwitch" ID="{B71E0775-5BD1-46d4-9212-0AD043A06C61}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="Switch LengthAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Switch LengthAttributeType" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/LimitSwitchRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Light" ID="{881B9160-DE7C-4abf-8A81-267EF628ED80}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="ColorAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ColorAttributeType" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/DeviceRoleClass/LightRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="FunctionGroup" ID="{1177441C-0166-40f6-93F3-3B8EED582B7F}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="LinearConveyor" ID="659c72ad-5b78-4760-a3af-15c22a449ba7">
+      <AdditionalInformation>ConceptMapping: [{"source_file_type":"csv","toolname":"SolidWorks","rule":"(TYPE == 'linear_conveyor')","attribute_mapping":[{"suc_attr_name":"Name","raw_data_name":"PartName","attribute_type":"AttributeLib/...","type":"string"},{"suc_attr_name":"ID","raw_data_name":"PART_NUMBER","attribute_type":"AttributeLib/...","type":"string"},{"suc_attr_name":"Conveyor_Length","raw_data_name":"conv_length","attribute_type":"AttributeLib/...","type":"float"}]}]</AdditionalInformation>
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="Weight" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/WeightAttributeType" />
+      <Attribute Name="Conveyor_Length" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Conveyor LengthAttributeType" />
+      <Attribute Name="uuid" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/uuid">
+        <Version>1.0.0</Version>
+      </Attribute>
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass/LinearConveyorRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="RotationConveyor" ID="d4f246b0-30fe-48d1-acbd-cb457cc12ab8">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="WeightAttributeType" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/WeightAttributeType" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass/RotationConveyorRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Machine" ID="{C07EAB2E-948F-42b9-A4CA-6393EE30B68E}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="MCADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <SupportedRoleClass RefRoleClassPath="MCADRoleClassLib/FunctionGroupRoleClass/MachineRoleClass" />
+    </SystemUnitClass>
+  </SystemUnitClassLib>
+  <SystemUnitClassLib Name="ECADSystemUnitClassLib">
+    <SystemUnitClass Name="Device" ID="{6E8FF626-DD41-47b2-B9CA-0935B53077D7}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+      <Attribute Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/AnschlussbezeichnungAttributeType" />
+      <ExternalInterface Name="ClampingPointInterface" ID="{EF333A6A-790F-4852-AAF8-0CE2A3E5E018}" RefBaseClassPath="ECADInterfaceClassLib/ClampingPointInterfaceClass" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+    <SystemUnitClass Name="Wire" ID="{D9E43714-F196-4864-AD14-543263B65B89}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <Attribute Name="QuelleAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/QuelleAttributeType" />
+      <Attribute Name="ZielAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/ZielAttributeType" />
+      <Attribute Name="BMKAttributeType" AttributeDataType="xs:string" RefAttributeType="ECADAttributeTypeLib/BMKAttributeType" />
+      <SupportedRoleClass RefRoleClassPath="ECADRoleClassLib/WireRoleClass" />
+    </SystemUnitClass>
+  </SystemUnitClassLib>
+  <SystemUnitClassLib Name="AutomationSystemUnitClassLib">
+    <SystemUnitClass Name="Device" ID="{2582FAFE-A369-41aa-A7E2-D581B77072CF}">
+      <Attribute Name="Name" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/Name" />
+      <Attribute Name="ID" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/ID" />
+      <Attribute Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/functionOrientedReferenceDesignation" />
+      <Attribute Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/productOrientedReferenceDesignation" />
+      <Attribute Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" RefAttributeType="AutomationAttributeTypeLib/locationOrientedReferenceDesignation" />
+      <ExternalInterface Name="TagInterface" ID="{17D7BDBA-2D5B-4675-A0F8-A10FA97A5294}" RefBaseClassPath="AutomationInterfaceClassLib/TagInterfaceClass" />
+      <SupportedRoleClass RefRoleClassPath="AutomationRoleClassLib/DeviceRoleClass" />
+    </SystemUnitClass>
+  </SystemUnitClassLib>
+  <AttributeTypeLib Name="AutomationMLBaseAttributeTypeLib">
+    <Description>Standard Automation Markup Language Attribute Type Library</Description>
+    <Version>2.10.0</Version>
+    <AttributeType Name="Direction" AttributeDataType="xs:string">
+      <Constraint Name="AllowedValues">
+        <NominalScaledType>
+          <RequiredValue>In</RequiredValue>
+          <RequiredValue>Out</RequiredValue>
+          <RequiredValue>InOut</RequiredValue>
+        </NominalScaledType>
+      </Constraint>
+    </AttributeType>
+    <AttributeType Name="Cardinality">
+      <Attribute Name="MinOccur" AttributeDataType="xs:unsignedInt" />
+      <Attribute Name="MaxOccur" AttributeDataType="xs:unsignedInt" />
+    </AttributeType>
+    <AttributeType Name="Category" AttributeDataType="xs:string" />
+    <AttributeType Name="refURI" AttributeDataType="xs:anyURI" />
+    <AttributeType Name="AssociatedFacet" AttributeDataType="xs:string" />
+    <AttributeType Name="ListType" />
+    <AttributeType Name="OrderedListType" />
+    <AttributeType Name="LocalizedAttribute" AttributeDataType="xs:string" />
+    <AttributeType Name="AssociatedExternalValue">
+      <Attribute Name="refCAEXAttribute" />
+      <Attribute Name="refURI" RefAttributeType="AutomationMLBaseAttributeTypeLib/refURI" />
+      <Attribute Name="Direction" RefAttributeType="AutomationMLBaseAttributeTypeLib/Direction" />
+    </AttributeType>
+    <AttributeType Name="MIMEType" AttributeDataType="xs:string" />
+    <AttributeType Name="DocLang" AttributeDataType="xs:string" />
+  </AttributeTypeLib>
+  <AttributeTypeLib Name="PPRAttributeTypeLib">
+    <Version>0</Version>
+    <AttributeType Name="Name" AttributeDataType="xs:string" />
+    <AttributeType Name="ID" AttributeDataType="xs:string" />
+    <AttributeType Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+    <AttributeType Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+    <AttributeType Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+  </AttributeTypeLib>
+  <AttributeTypeLib Name="MCADAttributeTypeLib">
+    <Version>0</Version>
+    <AttributeType Name="Name" AttributeDataType="xs:string" />
+    <AttributeType Name="ID" AttributeDataType="xs:string" />
+    <AttributeType Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+    <AttributeType Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+    <AttributeType Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+    <AttributeType Name="ColorAttributeType" AttributeDataType="xs:string" />
+    <AttributeType Name="Conveyor LengthAttributeType" AttributeDataType="xs:string" />
+    <AttributeType Name="No. Digital InputAttributeType" AttributeDataType="xs:string" />
+    <AttributeType Name="No. Digital OutputAttributeType" AttributeDataType="xs:string" />
+    <AttributeType Name="Sensing RageAttributeType" AttributeDataType="xs:string" />
+    <AttributeType Name="Shaft DiameterAttributeType" AttributeDataType="xs:string" />
+    <AttributeType Name="Switch LengthAttributeType" AttributeDataType="xs:string" />
+    <AttributeType Name="WeightAttributeType" AttributeDataType="xs:string" />
+    <AttributeType Name="uuid" ID="e8bae705-2f94-4cea-a8d1-43b8a9cd42d5" AttributeDataType="xs:string">
+      <Version>1.0.0</Version>
+    </AttributeType>
+  </AttributeTypeLib>
+  <AttributeTypeLib Name="ECADAttributeTypeLib">
+    <Version>0</Version>
+    <AttributeType Name="Name" AttributeDataType="xs:string" />
+    <AttributeType Name="ID" AttributeDataType="xs:string" />
+    <AttributeType Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+    <AttributeType Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+    <AttributeType Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+    <AttributeType Name="AnschlussbezeichnungAttributeType" AttributeDataType="xs:string" />
+    <AttributeType Name="BMKAttributeType" AttributeDataType="xs:string" />
+    <AttributeType Name="QuelleAttributeType" AttributeDataType="xs:string" />
+    <AttributeType Name="ZielAttributeType" AttributeDataType="xs:string" />
+  </AttributeTypeLib>
+  <AttributeTypeLib Name="AutomationAttributeTypeLib">
+    <Version>0</Version>
+    <AttributeType Name="Name" AttributeDataType="xs:string" />
+    <AttributeType Name="ID" AttributeDataType="xs:string" />
+    <AttributeType Name="functionOrientedReferenceDesignation" AttributeDataType="xs:string" />
+    <AttributeType Name="productOrientedReferenceDesignation" AttributeDataType="xs:string" />
+    <AttributeType Name="locationOrientedReferenceDesignation" AttributeDataType="xs:string" />
+  </AttributeTypeLib>
+</CAEXFile>

@@ -1,0 +1,88 @@
+ConceptMapping: [
+    {
+        "source_file_type": "csv",
+        "toolname": "mechanical",
+        "rule": "(Type == 'part')",     
+        "attribute_mapping": [
+            {
+                "suc_attr_name": "Name",
+                "raw_data_name": "Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "ID",
+                "raw_data_name": "Manufacturing Position",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "NameAttributeType",
+                "raw_data_name": "Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "float"
+            },
+            {
+                "suc_attr_name": "ManufacturingPositionAttributeType",
+                "raw_data_name": "Manufacturing Positio",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }, 
+            {
+                "suc_attr_name": "VendorAttributeType",
+                "raw_data_name": "Manufacturer",
+                "attribute_type": "AttributeLib/...",
+                "type": "float"
+            },
+            {
+                "suc_attr_name": "ReplacementAttributeType",
+                "raw_data_name": "Replacement(E) or Wearing Part (V)",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }, 
+            {
+                "suc_attr_name": "QuantityAttributeType",
+                "raw_data_name": "Quantity",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "MaterialAttributeType",
+                "raw_data_name": "Material",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },  
+            {
+                "suc_attr_name": "BMWPartNumberAttributeType",
+                "raw_data_name": "BMW Part Number",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "EngineeringNameAttributeType",
+                "raw_data_name": "Engineering Name",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "EngineeringPositionAttributeType",
+                "raw_data_name": "Engineering Position",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "StandardAttributeType",
+                "raw_data_name": "xx",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            },
+            {
+                "suc_attr_name": "TypeAttributeType",
+                "raw_data_name": "Type",
+                "attribute_type": "AttributeLib/...",
+                "type": "string"
+            }
+            
+        ]
+    }
+]
