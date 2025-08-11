@@ -13,4 +13,5 @@ streamlit-condition-tree
 xsdata==23.6
 xsdata-pydantic==22.10
 openpyxl
+xlsxwriter
 
