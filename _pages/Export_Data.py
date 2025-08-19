@@ -1,5 +1,7 @@
 import streamlit as st
 import json
+from model import Caexfile              # NEW
+from utils import parser_definition, json_unabbreviate  # NEW
 
 def main():
     aml_dict = st.session_state.get("aml_dict", {})
@@ -39,7 +41,6 @@ def main():
         toolname = st.session_state["lib_toolnames"].get(lib_name, "")
 
         if not toolname.strip():
-            # st.warning(f"Tool name not set for library: {lib_name}.")
             continue
 
         for system_unit in lib.get("SystemUnitClass", []):
@@ -80,10 +81,21 @@ def main():
     # st.subheader("📦 AML Dict Updated with Additional_Information")
     st.json(aml_dict)
 
-    st.download_button(
-        label="Download JSON",
-        data=json.dumps(aml_dict, indent=2),
-        file_name="aml_with_additional_info.json",
-        mime="application/json",
-        use_container_width=True
-    )
+    # NEW: Convert enriched dict back to AML and provide download
+    if aml_dict:
+        try:
+            context, parser, json_parser, xml_serializer, json_serializer = parser_definition()
+            full_json = json_unabbreviate(aml_dict)
+            xml_obj: Caexfile = json_parser.bind_dataclass(full_json, Caexfile)
+            xml_string = xml_serializer.render(xml_obj)
+
+            st.download_button(
+                "⬇️ Download AML (.aml)",
+                data=xml_string,
+                file_name=f"{st.session_state.get('file_name','aml_export')}.aml",
+                mime="text/xml",
+                use_container_width=True
+            )
+            st.success("AML file with ConceptMappings exported successfully ✅")
+        except Exception as e:
+            st.error(f"Failed to export AML: {e}")
