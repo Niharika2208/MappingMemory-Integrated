@@ -97,6 +97,6 @@ def main():
                 mime="text/xml",
                 use_container_width=True
             )
-            st.success("AML file with ConceptMappings exported successfully ✅")
+            # st.success("AML file with ConceptMappings exported successfully ✅")
         except Exception as e:
             st.error(f"Failed to export AML: {e}")
