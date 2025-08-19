@@ -79,6 +79,7 @@ def main():
         # RIGHT: Schema Matching UI (inside expander)
         with col_right:
             with st.expander("Match Entries to SystemUnitClasses", expanded=False):
+                st.info('Match each of the asset to their respective System Unit Classes', icon="ℹ️")
                 class_options = st.session_state.get("system_unit_class_names", [])
                 if not class_options:
                     st.warning("No SystemUnitClass names available. Please run 'Common Concept' first.")
