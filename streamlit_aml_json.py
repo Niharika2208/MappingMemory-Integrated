@@ -63,7 +63,7 @@ mode = sac.segmented(
     items=[
         sac.SegmentedItem(label='AML to JSON', icon='file-code'),
         sac.SegmentedItem(label='Data Mapping', icon="🧠"),
-        sac.SegmentedItem(label='JSON to AML', icon='file-text'),
+        # sac.SegmentedItem(label='JSON to AML', icon='file-text'),
     ],
     label='Select Mode',
     align='center',
@@ -72,9 +72,9 @@ mode = sac.segmented(
 
 if mode == 'AML to JSON':
     nav_items = ["Upload AML File", "Check JSON conversion", "Optimize storage Size", "Download JSON"]
-elif mode == 'JSON to AML':
-    nav_items = ["Upload JSON File"]
-elif mode == 'Data Mapping':
+# elif mode == 'JSON to AML':
+#    nav_items = ["Upload JSON File"]
+else:
     nav_items = ["Common Concept", "Investigate and Match", "Build Mapping Rules", "Match Concept to Data", "Export Data"]
 
 
