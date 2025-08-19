@@ -64,7 +64,9 @@ def main():
 
     # If we have data, render the two-column layout
     if st.session_state["raw_df"] is not None:
-        df = st.session_state["raw_df"]
+        df = st.session_state["raw_df"].copy()
+        df.index = df.index + 1
+
 
         col_left, col_right = st.columns([3, 2])
 
