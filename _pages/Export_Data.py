@@ -24,6 +24,7 @@ def main():
     # 🟦 Show toolname input per library in columns
     cols_per_row = 4
     st.subheader("Tool names:")
+    st.info('Enter the Tool name and press "Enter" ', icon="ℹ️")
     for i in range(0, len(libs), cols_per_row):
         row_libs = libs[i:i + cols_per_row]
         columns = st.columns(len(row_libs))
