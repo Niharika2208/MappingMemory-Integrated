@@ -1,6 +1,8 @@
 import streamlit as st
 from st_cytoscape import cytoscape
 import pandas as pd
+from db_utils import upsert_common_concept
+from db_utils import upsert_common_concept_attr
 
 def main():
     aml_dict = st.session_state.get("aml_dict", {})
@@ -69,6 +71,23 @@ def main():
             st.error("Unsupported selection format.")
             return
 
+        origin_id = st.session_state.get("origin_project_id")
+        if not origin_id:
+            st.error("No OriginProjectID in session. Load/parse an AML first.")
+            st.stop()
+
+        # Save just the selected class
+        concept_id = upsert_common_concept(
+            origin_project_id=str(origin_id).strip(),
+            sys_unitclass_lib=str(selected_lib_name).strip(),
+            sys_unitclass=str(selected_class_name).strip()
+        )
+
+
+        # Keep for cross-app use
+        st.session_state["concept_id"] = concept_id
+        st.session_state.setdefault("concept_ids_by_class", {})[selected_class_name] = concept_id
+
         st.session_state["system_unit_class_attributes"] = {}
 
         for class_name, class_obj in class_name_to_obj.items():
@@ -89,5 +108,6 @@ def main():
         if attribute_names:
             st.subheader(f"Attributes of '{selected_class_name}'")
             st.table(pd.DataFrame({"Attribute Name": attribute_names}))
+            inserted = upsert_common_concept_attr(origin_id, concept_id, attribute_names, selected_class_name)
         else:
             st.info(f"No Attributes found under '{selected_class_name}'.")
