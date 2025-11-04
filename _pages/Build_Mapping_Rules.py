@@ -1,8 +1,8 @@
 import streamlit as st
-import pandas as pd
+
 import time
 from streamlit_condition_tree import condition_tree, config_from_dataframe
-# from db_utils import upsert_mapping_rules
+
 
 def main():
     st.title("Build Mapping Rules")
@@ -23,35 +23,28 @@ def main():
         st.warning("No schema mapping found. Please map entries in the previous step.")
         return
 
-    # --- State setup for widget reset logic ---
-    if "schema_rules" not in st.session_state:
-        st.session_state["schema_rules"] = {}
-
-    if "ct_key" not in st.session_state:
-        st.session_state["ct_key"] = "ct_init"
-
-    # When project changes, you might also want to clear form state
-    # if "prev_origin_project_id" not in st.session_state:
-    #     st.session_state["prev_origin_project_id"] = st.session_state.get("origin_project_id")
-
-    # def _project_changed():
-    #     return st.session_state.get("origin_project_id") != st.session_state.get("prev_origin_project_id")
+    # --- State setup ---
+    st.session_state.setdefault("schema_rules", {})
+    st.session_state.setdefault("ct_key", "ct_init")
+    st.session_state.setdefault("suppress_rule_view", False)
 
     def on_schema_change():
-        # Force a fresh instance of the condition_tree widget
+        # New key ensures a fresh condition_tree instance
         st.session_state["ct_key"] = f"ct_{st.session_state['selected_schema']}_{int(time.time())}"
-        # Optional: clear any temporary preview variables you use
-        st.session_state["current_rule_preview"] = None
+        # Hide any previously shown rule text until user saves/tries again
+        st.session_state["suppress_rule_view"] = True
+        # Force immediate rerun so the new key applies right away
+        st.rerun()
 
     # Select current SystemUnitClass with change callback
-    default_index = 0
-    if "selected_schema" in st.session_state and st.session_state["selected_schema"] in found_schemas:
-        default_index = found_schemas.index(st.session_state["selected_schema"])
+    # (No 'index' arg; we let Streamlit manage via key for stability)
+
+
 
     selected_schema = st.selectbox(
         "Select the concept for which you want to derive the rule:",
         found_schemas,
-        index=default_index,
+
         key="selected_schema",
         on_change=on_schema_change,
     )
@@ -62,46 +55,39 @@ def main():
         config,
         min_height=250,
         always_show_buttons=True,
-        placeholder='Click "Add Rule" top right to build the mapping rule',
-        key=st.session_state["ct_key"],   # <-- critical for resetting state
+        placeholder='Click "Add Rule" (top right) to build the mapping rule',
+        key=st.session_state["ct_key"],
     )
 
-    origin_project_id = st.session_state.get("origin_project_id")
+    # Save rule locally in session
 
     if st.button("Try Query", type="primary", use_container_width=True):
-        #if not origin_project_id:
-        #    st.error("No OriginProjectID in session. Load a project first.")
+
+
         if not selected_schema:
             st.error("Pick a SystemUnitClass.")
         elif not query_string or not str(query_string).strip():
             st.error("Enter a rule.")
         else:
-            # Save in session for CURRENT schema only
+
             st.session_state["schema_rules"][selected_schema] = str(query_string).strip()
+            # Now it's safe to show the rule again
+            st.session_state["suppress_rule_view"] = False
+            st.success(f"Rule saved for {selected_schema}")
 
-            # Persist to DB
-            #try:
-            #    inserted_id = upsert_mapping_rules(
-            #        origin_project_id=str(origin_project_id).strip(),
-            #        sys_unitclass=str(selected_schema).strip(),
-            #        rule=str(query_string).strip()
-            #    )
-            #    if inserted_id:
-            #        st.success(f"Rule saved for {selected_schema}")
-            #    else:
-            #        st.info("This exact rule already exists for this project/class.")
-            #except Exception as e:
-            #    st.error(f"DB error saving rule: {e}")
-
-    # 🔍 Show ONLY the current schema's saved rule (hide all others)
+    # 🔍 Show ONLY the current schema's saved rule (hide after switch until saved again
     st.divider()
-    current_rule = st.session_state.get("schema_rules", {}).get(selected_schema)
-    if current_rule:
-        st.write(f"Saved rule for **{selected_schema}**: `{current_rule}`")
-    else:
+    if st.session_state.get("suppress_rule_view", False):
         st.info(f"No rule yet for {selected_schema}")
 
-    # Optional: compact “status tiles” per schema (without showing rules)
+    else:
+        current_rule = st.session_state.get("schema_rules", {}).get(selected_schema)
+        if current_rule:
+            st.write(f"Saved rule for **{selected_schema}**: `{current_rule}`")
+        else:
+            st.info(f"No rule yet for {selected_schema}")
+
+    # Optional: compact status tiles
     st.divider()
     cols = st.columns(len(found_schemas))
     for i, schema in enumerate(found_schemas):
