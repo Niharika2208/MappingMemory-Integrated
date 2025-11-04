@@ -4,9 +4,6 @@ import json
 import xml.etree.ElementTree as ET
 from io import BytesIO
 
-#def main():
-#st.title("Step 1: Investigate Raw Data")
-
 def parse_xml_to_dataframe(xml_file_path):
     # Load the XML file and parse it
     tree = ET.parse(xml_file_path)
