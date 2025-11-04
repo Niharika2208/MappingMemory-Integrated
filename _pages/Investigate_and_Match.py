@@ -3,6 +3,7 @@ import pandas as pd
 import json
 import xml.etree.ElementTree as ET
 from io import BytesIO
+# from db_utils import upsert_investigate_match_rows
 
 def parse_xml_to_dataframe(xml_file_path):
     tree = ET.parse(xml_file_path)
@@ -64,9 +65,7 @@ def main():
 
     # If we have data, render the two-column layout
     if st.session_state["raw_df"] is not None:
-        df = st.session_state["raw_df"].copy()
-        df.index = df.index + 1
-
+        df = st.session_state["raw_df"]
 
         col_left, col_right = st.columns([3, 2])
 
@@ -79,7 +78,6 @@ def main():
         # RIGHT: Schema Matching UI (inside expander)
         with col_right:
             with st.expander("Match Entries to SystemUnitClasses", expanded=False):
-                st.info('Match each of the asset to their respective System Unit Classes', icon="ℹ️")
                 class_options = st.session_state.get("system_unit_class_names", [])
                 if not class_options:
                     st.warning("No SystemUnitClass names available. Please run 'Common Concept' first.")
@@ -108,8 +106,30 @@ def main():
                             )
                             st.session_state["found_schemas"][idx] = selected
 
+
                 if st.button("✅ Confirm Mapping", use_container_width=True):
-                    st.success("Your selections have been saved.")
+                    #origin_project_id = st.session_state.get("origin_project_id")
+                    #if not origin_project_id:
+                    #    st.error("No OriginProjectID in session.")
+                    #    st.stop()
+
+                    first_col = df.columns[0]
+                    rows = []
+                    for idx, row in df.reset_index(drop=True).iterrows():
+                        cell = row[first_col]
+                        chosen = st.session_state["found_schemas"].get(idx)
+                        if pd.isna(cell) or not chosen:
+                            continue
+                        rows.append({"val": str(cell).strip(), "cls": str(chosen).strip()})
+                    st.success("Mapping saved successfully")
+
+                    # st.write("Preview payload:", rows[:5])
+
+                   # affected = upsert_investigate_match_rows(origin_project_id, rows)
+                    # st.success(f"Saved/updated {affected} rows.")
+
+
+
 
     else:
         st.info("Upload a CSV/XLSX/JSON/XML file to begin.")
